@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
-    base: process.env.VITE_APP_BASENAME,
+    base: '/project-architecture-demo/',
     plugins: [react()],
     resolve: {
         alias: {

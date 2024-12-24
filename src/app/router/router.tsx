@@ -8,7 +8,7 @@ import Board from '@/pages/board/ui/Board.tsx'
 import { BoardsPage } from '@/pages/boards'
 import { ManageBoardsPage } from '@/pages/manage-boards'
 
-const basename = import.meta.env.VITE_APP_BASENAME
+// const basename = import.meta.env.VITE_APP_BASENAME
 
 export const router = createBrowserRouter(
     [
@@ -31,5 +31,5 @@ export const router = createBrowserRouter(
             ],
         },
     ],
-    { basename: basename }
+    { basename: '/project-architecture-demo/' }
 )
