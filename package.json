@@ -6,7 +6,7 @@
     "type": "module",
     "scripts": {
         "dev": "cross-env VITE_APP_BASENAME=/ vite",
-        "build": "cross-env VITE_APP_BASENAME=/project-architecture-demo vite build",
+        "build": "cross-env VITE_APP_BASENAME=/project-architecture-demo/ vite build",
         "lint": "eslint .",
         "preview": "vite preview"
     },

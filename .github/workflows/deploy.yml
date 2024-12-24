@@ -1,5 +1,8 @@
 name: Deploy to GitHub Pages
 
+env:
+    VITE_APP_BASENAME: '/project-architecture-demo/'
+
 on:
   push:
     branches:
