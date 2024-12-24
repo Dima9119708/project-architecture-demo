@@ -34,7 +34,7 @@
 
 ## Демо
 
-Вы можете ознакомиться с демо-версией проекта по следующей ссылке: [GitHub Pages Demo](https://your-username.github.io/your-repository-name/)
+Вы можете ознакомиться с демо-версией проекта по следующей ссылке: [GitHub Pages Demo](https://dima9119708.github.io/project-architecture-demo/)
 
 ## Почему это важно
 
