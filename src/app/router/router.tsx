@@ -8,23 +8,28 @@ import Board from '@/pages/board/ui/Board.tsx'
 import { BoardsPage } from '@/pages/boards'
 import { ManageBoardsPage } from '@/pages/manage-boards'
 
-export const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <AppInit />,
-        children: [
-            {
-                path: EnumRoutes.MANAGE_BOARDS,
-                element: <ManageBoardsPage />,
-            },
-            {
-                path: EnumRoutes.BOARD,
-                element: <Board />,
-            },
-            {
-                path: EnumRoutes.BOARDS,
-                element: <BoardsPage />,
-            },
-        ],
-    },
-])
+const basename = import.meta.env.VITE_APP_BASENAME
+
+export const router = createBrowserRouter(
+    [
+        {
+            path: '/',
+            element: <AppInit />,
+            children: [
+                {
+                    path: EnumRoutes.MANAGE_BOARDS,
+                    element: <ManageBoardsPage />,
+                },
+                {
+                    path: EnumRoutes.BOARD,
+                    element: <Board />,
+                },
+                {
+                    path: EnumRoutes.BOARDS,
+                    element: <BoardsPage />,
+                },
+            ],
+        },
+    ],
+    { basename: basename }
+)
