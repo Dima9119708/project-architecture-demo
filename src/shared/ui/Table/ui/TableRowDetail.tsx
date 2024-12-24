@@ -1,8 +1,9 @@
-import { subRowStore } from '../model/TableStores.ts'
-import { useExternalBooleanState } from '../model/useExternalBooleanState.ts'
 import * as React from 'react'
 
 import { cn } from '@/shared/lib/utils.ts'
+
+import { subRowStore } from '../model/TableStores.ts'
+import { useExternalBooleanState } from '../model/useExternalBooleanState.ts'
 
 export const TableRowDetail = React.forwardRef<
     HTMLTableCellElement,

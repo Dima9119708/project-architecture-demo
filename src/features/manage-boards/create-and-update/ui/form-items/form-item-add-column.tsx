@@ -4,11 +4,11 @@ import { useFormContext } from 'react-hook-form'
 import { useFieldArrayMethodsContext } from '@/shared/lib/form-field-array-provider.tsx'
 import { Button } from '@/shared/ui/button.tsx'
 
-import { TFormManageBoard } from '../../model/form-manage-board-types.ts'
+import { TFormManageBoardCreate, TFormManageBoardUpdate } from '../../model/form-manage-board-types.ts'
 
 const FormItemAddColumn = (props: { lastIndex: number }) => {
     const { append } = useFieldArrayMethodsContext()
-    const { trigger } = useFormContext<TFormManageBoard>()
+    const { trigger } = useFormContext<TFormManageBoardUpdate | TFormManageBoardCreate>()
 
     return (
         <Button
