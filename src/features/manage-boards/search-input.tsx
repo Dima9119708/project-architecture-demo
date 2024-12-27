@@ -8,7 +8,7 @@ const SearchInput = () => {
     return (
         <Search
             defaultValue={search ?? ''}
-            className="w-[20rem] bg-white"
+            className="w-[20rem] bg-background"
             onChange={setSearch}
         />
     )

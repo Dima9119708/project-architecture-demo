@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 
 import AppInit from '@/app/app-init/app-init.tsx'
+import NotFoundPage from '@/app/router/not-found-page.tsx'
 
 import { EnumRoutes } from '@/shared/config/routes/routes.ts'
 
@@ -27,6 +28,10 @@ export const router = createBrowserRouter(
                 {
                     path: EnumRoutes.BOARDS,
                     element: <BoardsPage />,
+                },
+                {
+                    path: '*',
+                    element: <NotFoundPage />,
                 },
             ],
         },

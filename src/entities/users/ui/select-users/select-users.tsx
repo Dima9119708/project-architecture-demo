@@ -61,13 +61,27 @@ const SelectUsers = (props: SelectUsersProps) => {
                             <SelectLabel>Administrators</SelectLabel>
                             {data
                                 ?.filter((user) => user.role === 'admin')
-                                .map((user) => <SelectItem value={user.id}>{user.name}</SelectItem>)}
+                                .map((user) => (
+                                    <SelectItem
+                                        key={user.id}
+                                        value={user.id}
+                                    >
+                                        {user.name}
+                                    </SelectItem>
+                                ))}
                         </SelectGroup>
                         <SelectGroup>
                             <SelectLabel>Users</SelectLabel>
                             {data
                                 ?.filter((user) => user.role === 'user')
-                                .map((user) => <SelectItem value={user.id}>{user.name}</SelectItem>)}
+                                .map((user) => (
+                                    <SelectItem
+                                        key={user.id}
+                                        value={user.id}
+                                    >
+                                        {user.name}
+                                    </SelectItem>
+                                ))}
                         </SelectGroup>
                     </>
                 )}

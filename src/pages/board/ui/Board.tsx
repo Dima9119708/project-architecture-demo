@@ -59,7 +59,7 @@ const Board = () => {
                     )
                 }
             >
-                <div className="w-full flex-1 flex gap-8 overflow-auto bg-white p-4 rounded">
+                <div className="w-full flex-1 flex gap-8 overflow-auto bg-background p-4 rounded">
                     {boardQuery.data &&
                         boardQuery.data.columns?.map(({ title, id: columnId, items }) => (
                             <SortableColumn

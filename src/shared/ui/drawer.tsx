@@ -39,7 +39,7 @@ const DrawerContent = React.forwardRef<
         <DrawerPrimitive.Content
             ref={ref}
             className={cn(
-                'fixed bottom-2 right-2 top-2 z-50 flex w-[40rem] flex-col rounded-2xl border bg-background outline-none after:hidden',
+                'fixed bottom-2 right-2 top-2 z-50 flex w-[40rem] flex-col rounded-md border bg-background outline-none after:hidden',
                 className
             )}
             style={{ '--initial-transform': 'calc(100% + 8px)' } as CSSProperties}

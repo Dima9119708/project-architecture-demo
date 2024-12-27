@@ -1,34 +1,51 @@
 import { Outlet } from 'react-router-dom'
 
-import { useSingInAs } from '@/features/auth/sing-in.tsx'
+import { Header, Layout } from '@/app/layout'
+import RoleRedirect from '@/app/role-redirect/role-redirect'
 
+import { useSingInAs } from '@/features/auth/sing-in'
+
+import { Role } from '@/entities/manage-roles'
 import { SessionProvider } from '@/entities/session'
 import { SelectUsers } from '@/entities/users'
 
-import { Header } from '@/shared/ui/app-shell/header.tsx'
-import { Spinner } from '@/shared/ui/spinner.tsx'
+import { Spinner } from '@/shared/ui/spinner'
 
 const AppInit = () => {
-    const { query, singInAs } = useSingInAs()
+    const { query, singInAs, navigationItems, actionItems } = useSingInAs()
+
+    const role = (query.data?.role ?? '') as Role
+
+    if (query.isLoading) {
+        return <Spinner overlay />
+    }
 
     return (
         <SessionProvider value={query.data ?? null}>
-            <div className="flex h-[100vh] flex-col bg-muted p-[2rem] gap-6">
-                <Header>
-                    <div className="flex items-center gap-3 flex-shrink-0">
-                        <div className="flex-shrink-0">Sing in as</div>
-                        <SelectUsers
-                            className="w-[15rem] bg-white"
-                            value={query.data}
-                            onChange={singInAs}
-                        />
-                    </div>
-                </Header>
+            <Layout>
+                <div className="flex justify-end items-center gap-2">
+                    Sing in as
+                    <SelectUsers
+                        className="w-[15rem] bg-background"
+                        value={query.data}
+                        onChange={singInAs}
+                    />
+                </div>
+
+                <RoleRedirect
+                    role={role}
+                    navigationItems={navigationItems}
+                />
+
+                <Header
+                    navigationItems={navigationItems[role] ?? []}
+                    actionItems={actionItems[role] ?? []}
+                />
 
                 {!query.isLoading && <Outlet />}
 
                 {query.isLoading && <Spinner overlay />}
-            </div>
+            </Layout>
         </SessionProvider>
     )
 }

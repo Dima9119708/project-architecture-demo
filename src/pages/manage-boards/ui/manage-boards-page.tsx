@@ -42,9 +42,9 @@ const ManageBoardsPage = () => {
 
     const { data, isLoading } = useQuery({
         ...manageBoardsQuery({
-            search: search ?? undefined,
+            search: search,
             offset,
-            limit: limit ?? undefined,
+            limit: limit,
         }),
     })
 
