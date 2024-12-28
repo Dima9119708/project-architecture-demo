@@ -1,17 +1,13 @@
-import { createHashRouter } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
 
 import AppInit from '@/app/app-init/app-init'
 import NotFoundPage from '@/app/router/not-found-page'
 
 import { EnumRoutes } from '@/shared/config/routes/routes'
 
-import Board from '@/pages/board/ui/Board'
-import { BoardsPage } from '@/pages/boards'
-import { ManageBoardsPage } from '@/pages/manage-boards'
-
 const basename = import.meta.env.VITE_APP_BASENAME
 
-export const router = createHashRouter(
+export const router = createBrowserRouter(
     [
         {
             path: '/',
@@ -19,15 +15,33 @@ export const router = createHashRouter(
             children: [
                 {
                     path: EnumRoutes.MANAGE_BOARDS,
-                    element: <ManageBoardsPage />,
+                    lazy: async () => {
+                        const { ManageBoardsPage } = await import('@/pages/manage-boards')
+
+                        return {
+                            element: <ManageBoardsPage />,
+                        }
+                    },
                 },
                 {
                     path: EnumRoutes.BOARD,
-                    element: <Board />,
+                    lazy: async () => {
+                        const { Board } = await import('@/pages/board')
+
+                        return {
+                            element: <Board />,
+                        }
+                    },
                 },
                 {
                     path: EnumRoutes.BOARDS,
-                    element: <BoardsPage />,
+                    lazy: async () => {
+                        const { BoardsPage } = await import('@/pages/boards')
+
+                        return {
+                            element: <BoardsPage />,
+                        }
+                    },
                 },
                 {
                     path: '*',
