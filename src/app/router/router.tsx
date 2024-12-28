@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createHashRouter } from 'react-router-dom'
 
 import AppInit from '@/app/app-init/app-init'
 import NotFoundPage from '@/app/router/not-found-page'
@@ -7,7 +7,7 @@ import { EnumRoutes } from '@/shared/config/routes/routes'
 
 const basename = import.meta.env.VITE_APP_BASENAME
 
-export const router = createBrowserRouter(
+export const router = createHashRouter(
     [
         {
             path: '/',
