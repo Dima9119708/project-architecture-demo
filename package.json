@@ -2,7 +2,7 @@
     "name": "test-ceo-imrev-agency",
     "private": true,
     "version": "0.0.0",
-    "homepage": ".",
+    "homepage": "https://dima9119708.github.io/project-architecture-demo/",
     "type": "module",
     "scripts": {
         "dev": "cross-env VITE_APP_BASENAME=/ vite",
