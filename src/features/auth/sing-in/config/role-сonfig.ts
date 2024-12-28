@@ -54,18 +54,6 @@ export const NAVIGATION_ITEMS: Record<Role, NavigationItems> = {
         {
             path: EnumRoutes.DASHBOARD,
         },
-        {
-            path: EnumRoutes.FILTERS,
-        },
-        {
-            path: EnumRoutes.TEAM,
-        },
-        {
-            path: EnumRoutes.PLANS,
-        },
-        {
-            path: EnumRoutes.CHAT,
-        },
     ],
     [ROLES.MANAGER]: [
         {
