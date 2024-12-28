@@ -10,7 +10,7 @@ interface RoleRedirectProps {
     actionItems: ActionItems
 }
 
-export const Header: FC<RoleRedirectProps> = (props) => {
+const Header: FC<RoleRedirectProps> = (props) => {
     const { actionItems, navigationItems } = props
     const location = useLocation()
     const navigationAndActionItems = useMemo<NavigationAndActionItems>(() => [navigationItems, actionItems], [navigationItems, actionItems])
@@ -26,3 +26,5 @@ export const Header: FC<RoleRedirectProps> = (props) => {
         />
     )
 }
+
+export default Header

@@ -32,7 +32,7 @@ const RenderDropdownItem = memo((item: { isActivePath: boolean; name: string; Ic
     )
 })
 
-const NavUser = (props: ItemConfig) => {
+export const NavUser = (props: ItemConfig) => {
     const session = useSessionContext()
     const location = useLocation()
 
@@ -149,5 +149,3 @@ const NavUser = (props: ItemConfig) => {
         </DropdownMenu>
     )
 }
-
-export default NavUser

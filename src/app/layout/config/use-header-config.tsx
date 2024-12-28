@@ -252,7 +252,7 @@ export const useHeaderConfig = (props: { navigationAndActionItems: NavigationAnd
                 },
                 ['profile']: {
                     lazy: async () => {
-                        const { NavUser } = await import('@/app/layout')
+                        const { NavUser } = await import('../ui/nav-user/nav-user')
 
                         return {
                             component: ({ itemConfig }) => {
