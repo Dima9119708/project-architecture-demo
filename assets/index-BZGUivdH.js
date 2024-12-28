@@ -1,0 +1,1 @@
+import{r,u as o,j as n,B as a}from"./index-D8EBPATn.js";const u=()=>{const t=r.useRef(0),{data:e}=o({queryKey:["report-count"],queryFn:()=>++t.current,refetchInterval:2e3});return n.jsx(a,{variant:"default",children:e})};export{u as ReportCountNotification};
