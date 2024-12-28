@@ -1,12 +1,13 @@
+import { useQueryClient } from '@tanstack/react-query'
+
 import { api } from '@/shared/config/api/config'
 
 import { useLimitState, useOffsetState, useSearchState } from './model/states-hooks.ts'
-import { useQueryClient } from '@tanstack/react-query'
 
 const boardsQueryKey = 'manage-boards'
 
 export const manageBoardsQuery = (body?: { limit?: number; offset?: number; search?: string }) => ({
-    queryKey: [boardsQueryKey, body?.limit, body?.offset, body?.search],
+    queryKey: [boardsQueryKey, body],
     queryFn: () => api.getBoards(body),
 })
 

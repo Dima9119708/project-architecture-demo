@@ -1,9 +1,10 @@
-import { useMutation } from '@tanstack/react-query'
 import generate from 'boring-name-generator'
 import { Plus } from 'lucide-react'
 import { nanoid } from 'nanoid'
 import { FC, PropsWithChildren, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+
+import { useMutation } from '@tanstack/react-query'
 
 import { useInvalidateBoardById } from '@/entities/board'
 import {
@@ -86,7 +87,7 @@ export const CreateTaskByBoardById: FC<PropsWithChildren<CreateTaskByBoardIdProp
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className="bg-white rounded flex gap-2"
+            className="bg-background rounded flex gap-2"
         >
             <Controller
                 name="title"

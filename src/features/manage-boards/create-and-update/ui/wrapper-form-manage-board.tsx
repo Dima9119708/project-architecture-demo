@@ -1,9 +1,10 @@
-import { FormManageBoardContext } from '../model/form-manage-board-context.ts'
 import { FC, FunctionComponent, useState } from 'react'
 import * as React from 'react'
 import { Drawer as DrawerPrimitive } from 'vaul'
 
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/shared/ui/drawer.tsx'
+
+import { FormManageBoardContext } from '../model/form-manage-board-context.ts'
 
 const WrapperFormManageBoard: FC<{
     triggerElement: React.ReactNode
@@ -22,7 +23,7 @@ const WrapperFormManageBoard: FC<{
                 onOpenChange?.(open)
             }}
         >
-            <DrawerTrigger>{triggerElement}</DrawerTrigger>
+            <DrawerTrigger asChild>{triggerElement}</DrawerTrigger>
             <DrawerContent>
                 <DrawerHeader>
                     <DrawerTitle>Manage board</DrawerTitle>

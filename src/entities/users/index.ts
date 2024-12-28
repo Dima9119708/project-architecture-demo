@@ -1,3 +1,3 @@
-import SelectUsers from '@/entities/users/ui/select-users/select-users.tsx'
+import SelectUsersByRoles from './ui/select-users/select-users-by-roles'
 
-export { SelectUsers }
+export { SelectUsersByRoles }
