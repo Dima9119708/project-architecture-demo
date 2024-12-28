@@ -17,6 +17,7 @@ export enum EnumRoutes {
     TASKS = '/tasks',
     TASK = '/task/:taskId',
     SETTINGS = '/settings',
+    ACCOUNT = '/Account',
     REPORTS = '/reports',
     LOGS = '/logs',
     NOTIFICATIONS = '/notifications',
@@ -26,4 +27,6 @@ export enum EnumRoutes {
     INTEGRATIONS = '/integrations',
     CHAT = '/chat',
     ADMIN_SETTINGS = '/admin-settings',
+    UPGRADE_TO_PRO = '/upgrade-to-pro',
+    HELP = '/help',
 }

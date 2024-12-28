@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import { useQuery } from '@tanstack/react-query'
 
@@ -21,7 +21,7 @@ interface SelectUsersProps extends SelectBaseProps<TUser> {
     className?: string
 }
 
-const SelectUsers = (props: SelectUsersProps) => {
+const SelectUsersByRoles = (props: SelectUsersProps) => {
     const { className, onChange, value } = props
     const [isOpen, setIsOpen] = useState(false)
 
@@ -29,6 +29,12 @@ const SelectUsers = (props: SelectUsersProps) => {
         ...usersQuery(),
         enabled: isOpen,
     })
+
+    const groupByFormatData = useMemo(() => {
+        if (!data) return []
+
+        return Object.entries(Object.groupBy(data, (user) => user.role))
+    }, [data])
 
     return (
         <Select
@@ -55,39 +61,23 @@ const SelectUsers = (props: SelectUsersProps) => {
                         />
                     ))}
 
-                {!isLoading && (
-                    <>
-                        <SelectGroup>
-                            <SelectLabel>Administrators</SelectLabel>
-                            {data
-                                ?.filter((user) => user.role === 'admin')
-                                .map((user) => (
-                                    <SelectItem
-                                        key={user.id}
-                                        value={user.id}
-                                    >
-                                        {user.name}
-                                    </SelectItem>
-                                ))}
+                {!isLoading &&
+                    groupByFormatData.map(([role, users = []]) => (
+                        <SelectGroup key={role}>
+                            <SelectLabel className="capitalize">{role}</SelectLabel>
+                            {users.map((user) => (
+                                <SelectItem
+                                    key={user.id}
+                                    value={user.id}
+                                >
+                                    {user.name}
+                                </SelectItem>
+                            ))}
                         </SelectGroup>
-                        <SelectGroup>
-                            <SelectLabel>Users</SelectLabel>
-                            {data
-                                ?.filter((user) => user.role === 'user')
-                                .map((user) => (
-                                    <SelectItem
-                                        key={user.id}
-                                        value={user.id}
-                                    >
-                                        {user.name}
-                                    </SelectItem>
-                                ))}
-                        </SelectGroup>
-                    </>
-                )}
+                    ))}
             </SelectContent>
         </Select>
     )
 }
 
-export default SelectUsers
+export default SelectUsersByRoles

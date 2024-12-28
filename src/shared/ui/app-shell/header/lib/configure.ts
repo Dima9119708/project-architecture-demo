@@ -1,11 +1,16 @@
 import { FC, PropsWithChildren, ReactNode } from 'react'
-import { Link, matchPath } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+
+import { isMatchPath } from '@/shared/lib/is-match-path.ts'
+
+export type BaseItemConfig = Pick<ItemConfig, 'path' | 'name' | 'children'>
 
 export interface LazyItemConfig {
     component?: (options: {
-        matchPath: typeof matchPath
+        isMatchPath: typeof isMatchPath
         RouterLink: typeof Link
         LinkContainer: FC<PropsWithChildren<{ className?: string }>>
+        itemConfig: BaseItemConfig
     }) => ReactNode
     name?: string
     icon?: ReactNode
@@ -15,7 +20,6 @@ export interface ItemConfig {
     path: string
     name?: string
     icon?: ReactNode
-    show?: boolean
     fallback?: ReactNode
     errorFallback?: ReactNode
     lazy?: () => Promise<LazyItemConfig>
@@ -47,5 +51,5 @@ export const mergeNavigationAndReturnActionItems = (
         })
     }
 
-    return [recursiveMerge(basicConfig[0]), basicConfig[1]]
+    return [recursiveMerge(basicConfig[0]), recursiveMerge(basicConfig[1])]
 }

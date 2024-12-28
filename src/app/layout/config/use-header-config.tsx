@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-import { EnumRoutes } from '@/shared/config/routes/routes.ts'
+import { EnumRoutes } from '@/shared/config/routes/routes'
 import { NavigationAndActionItems, mergeNavigationAndReturnActionItems } from '@/shared/ui/app-shell/header'
 
 export const useHeaderConfig = (props: { navigationAndActionItems: NavigationAndActionItems }) => {
@@ -152,10 +152,16 @@ export const useHeaderConfig = (props: { navigationAndActionItems: NavigationAnd
                 [EnumRoutes.REPORTS]: {
                     lazy: async () => {
                         const { Eye } = await import('lucide-react')
+                        const { ReportCountNotification } = await import('@/entities/reports')
 
                         return {
-                            icon: <Eye />,
-                            name: 'Reports',
+                            component: ({ LinkContainer }) => (
+                                <LinkContainer>
+                                    <Eye />
+                                    Reports
+                                    <ReportCountNotification />
+                                </LinkContainer>
+                            ),
                         }
                     },
                 },
@@ -209,10 +215,18 @@ export const useHeaderConfig = (props: { navigationAndActionItems: NavigationAnd
                 [EnumRoutes.TASKS]: {
                     lazy: async () => {
                         const { Briefcase } = await import('lucide-react')
+                        const { TasksCountNotification } = await import('@/entities/task')
 
                         return {
                             icon: <Briefcase />,
                             name: 'Tasks',
+                            component: ({ LinkContainer }) => (
+                                <LinkContainer>
+                                    <Briefcase />
+                                    Tasks
+                                    <TasksCountNotification />
+                                </LinkContainer>
+                            ),
                         }
                     },
                 },
@@ -223,6 +237,27 @@ export const useHeaderConfig = (props: { navigationAndActionItems: NavigationAnd
                         return {
                             icon: <Settings />,
                             name: 'Admin settings',
+                        }
+                    },
+                },
+                [EnumRoutes.HELP]: {
+                    lazy: async () => {
+                        const { CircleHelp } = await import('lucide-react')
+
+                        return {
+                            icon: <CircleHelp />,
+                            name: 'Help',
+                        }
+                    },
+                },
+                ['profile']: {
+                    lazy: async () => {
+                        const { NavUser } = await import('@/app/layout')
+
+                        return {
+                            component: ({ itemConfig }) => {
+                                return <NavUser {...itemConfig} />
+                            },
                         }
                     },
                 },

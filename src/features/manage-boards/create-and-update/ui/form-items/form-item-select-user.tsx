@@ -1,6 +1,6 @@
 import { Controller } from 'react-hook-form'
 
-import { SelectUsers } from '@/entities/users'
+import { SelectUsersByRoles } from '@/entities/users'
 
 interface FormSelectUserProps {
     name: string
@@ -14,7 +14,7 @@ export const FormItemSelectUser = (props: FormSelectUserProps) => {
                 required: 'User is required',
             }}
             render={({ field, fieldState }) => (
-                <SelectUsers
+                <SelectUsersByRoles
                     value={field.value}
                     onChange={field.onChange}
                     error={fieldState.error?.message}

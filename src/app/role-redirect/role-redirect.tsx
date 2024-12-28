@@ -1,36 +1,44 @@
-import { useLayoutEffect } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import { NavigationItems, isPathInTreeWithMatch } from '@/shared/ui/app-shell/header'
+import { ActionItems, NavigationItems, isPathInTreeWithMatch } from '@/shared/ui/app-shell/header'
 
 interface RoleRedirectProps {
     role: string
     navigationItems: Record<'user' | 'admin' | string, NavigationItems>
+    actionItems: Record<'user' | 'admin' | string, ActionItems>
 }
 
 const RoleRedirect = (props: RoleRedirectProps) => {
-    const { role, navigationItems } = props
+    const { role, navigationItems, actionItems } = props
     const navigate = useNavigate()
     const location = useLocation()
 
+    const prevRoleRef = useRef<string | null>(null)
+
     useLayoutEffect(() => {
+        const prevRole = prevRoleRef.current
+        prevRoleRef.current = role
+
         if (!role) return
 
-        switch (role) {
-            case 'admin':
-                if (!isPathInTreeWithMatch(navigationItems.admin, location.pathname)) {
-                    navigate(navigationItems.admin[0].path)
-                }
-
-                break
-            case 'user':
-                if (!isPathInTreeWithMatch(navigationItems.user, location.pathname)) {
-                    navigate(navigationItems.user[0].path)
-                }
-
-                break
+        if (prevRole !== role) {
+            const currentNavigationItems = navigationItems[role] || []
+            if (currentNavigationItems.length > 0) {
+                navigate(currentNavigationItems[0].path)
+                return
+            }
         }
-    }, [role, navigationItems, location.pathname, navigate])
+
+        const currentNavigationItems = navigationItems[role] || []
+        const currentActionItems = actionItems[role] || []
+
+        if (!isPathInTreeWithMatch([...currentNavigationItems, ...currentActionItems], location.pathname)) {
+            if (currentNavigationItems.length > 0) {
+                navigate(currentNavigationItems[0].path)
+            }
+        }
+    }, [role, navigationItems, actionItems, location.pathname, navigate])
 
     return null
 }

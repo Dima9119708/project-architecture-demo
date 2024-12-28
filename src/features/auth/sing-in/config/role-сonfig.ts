@@ -1,15 +1,9 @@
-import { useState } from 'react'
-
-import { keepPreviousData, useQuery } from '@tanstack/react-query'
-
 import { ROLES, Role } from '@/entities/manage-roles'
-import { TUser } from '@/entities/users/model/types'
-import { usersQuery } from '@/entities/users/queries'
 
-import { EnumRoutes } from '@/shared/config/routes/routes'
+import { EnumRoutes } from '@/shared/config/routes/routes.ts'
 import { ActionItems, NavigationItems } from '@/shared/ui/app-shell/header'
 
-const NAVIGATION_ITEMS: Record<Role, NavigationItems> = {
+export const NAVIGATION_ITEMS: Record<Role, NavigationItems> = {
     [ROLES.ADMIN]: [
         {
             path: EnumRoutes.MANAGE_BOARDS,
@@ -70,9 +64,6 @@ const NAVIGATION_ITEMS: Record<Role, NavigationItems> = {
             path: EnumRoutes.PLANS,
         },
         {
-            path: EnumRoutes.NOTIFICATIONS,
-        },
-        {
             path: EnumRoutes.CHAT,
         },
     ],
@@ -100,9 +91,6 @@ const NAVIGATION_ITEMS: Record<Role, NavigationItems> = {
         {
             path: EnumRoutes.DASHBOARD,
         },
-        {
-            path: EnumRoutes.NOTIFICATIONS,
-        },
     ],
     [ROLES.DEVELOPER]: [
         {
@@ -118,33 +106,68 @@ const NAVIGATION_ITEMS: Record<Role, NavigationItems> = {
     ],
 }
 
-const ACTION_ITEMS: Record<Role, ActionItems> = {
-    [ROLES.ADMIN]: [{ path: 'notifications' }, { path: 'help' }, { path: 'admin-profile' }, { path: 'admin-settings' }],
-    [ROLES.USER]: [{ path: 'notifications' }, { path: 'help' }, { path: 'user-profile' }],
-    [ROLES.MANAGER]: [{ path: 'notifications' }, { path: 'help' }, { path: 'manager-profile' }, { path: 'analytics' }],
-    [ROLES.GUEST]: [{ path: 'notifications' }, { path: 'help' }, { path: 'guest-profile' }],
-    [ROLES.DEVELOPER]: [{ path: 'notifications' }, { path: 'help' }, { path: 'developer-profile' }, { path: 'developer-settings' }],
-}
+const BASE_ACTION_ITEMS: ActionItems = [{ path: EnumRoutes.HELP }]
 
-export const useSingInAs = () => {
-    const [session, singInAs] = useState<TUser | null>(null)
-
-    const query = useQuery({
-        queryKey: ['sing-in', session],
-        queryFn: usersQuery().queryFn,
-        select: (data) => {
-            if (session) return data.find((user) => user.id === session.id)
-            return data[0]
+export const ACTION_ITEMS: Record<Role, ActionItems> = {
+    [ROLES.ADMIN]: [
+        ...BASE_ACTION_ITEMS,
+        {
+            path: 'profile',
+            children: [
+                {
+                    path: 'group-1',
+                    children: [{ path: EnumRoutes.ACCOUNT }, { path: EnumRoutes.BILLING }, { path: EnumRoutes.NOTIFICATIONS }],
+                },
+            ],
         },
-        placeholderData: keepPreviousData,
-        gcTime: 0,
-    })
-
-    return {
-        query,
-        singInAs,
-        location,
-        navigationItems: NAVIGATION_ITEMS,
-        actionItems: ACTION_ITEMS,
-    }
+    ],
+    [ROLES.USER]: [
+        ...BASE_ACTION_ITEMS,
+        {
+            path: 'profile',
+            children: [
+                { path: 'group-1', children: [{ path: EnumRoutes.UPGRADE_TO_PRO }] },
+                {
+                    path: 'group-2',
+                    children: [{ path: 'guided-tour' }, { path: EnumRoutes.ACCOUNT }, { path: EnumRoutes.NOTIFICATIONS }],
+                },
+            ],
+        },
+    ],
+    [ROLES.MANAGER]: [
+        ...BASE_ACTION_ITEMS,
+        {
+            path: 'profile',
+            children: [
+                {
+                    path: 'group-1',
+                    children: [{ path: EnumRoutes.ACCOUNT }, { path: EnumRoutes.NOTIFICATIONS }],
+                },
+            ],
+        },
+    ],
+    [ROLES.GUEST]: [
+        ...BASE_ACTION_ITEMS,
+        {
+            path: 'profile',
+            children: [
+                {
+                    path: 'group-1',
+                    children: [{ path: EnumRoutes.ACCOUNT }, { path: EnumRoutes.NOTIFICATIONS }],
+                },
+            ],
+        },
+    ],
+    [ROLES.DEVELOPER]: [
+        ...BASE_ACTION_ITEMS,
+        {
+            path: 'profile',
+            children: [
+                {
+                    path: 'group-1',
+                    children: [{ path: EnumRoutes.ACCOUNT }, { path: EnumRoutes.NOTIFICATIONS }],
+                },
+            ],
+        },
+    ],
 }

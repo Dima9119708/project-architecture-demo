@@ -3,11 +3,11 @@ import { Outlet } from 'react-router-dom'
 import { Header, Layout } from '@/app/layout'
 import RoleRedirect from '@/app/role-redirect/role-redirect'
 
-import { useSingInAs } from '@/features/auth/sing-in'
+import { useSingInAs } from '@/features/auth/sing-in/ui/sing-in.tsx'
 
 import { Role } from '@/entities/manage-roles'
 import { SessionProvider } from '@/entities/session'
-import { SelectUsers } from '@/entities/users'
+import { SelectUsersByRoles } from '@/entities/users'
 
 import { Spinner } from '@/shared/ui/spinner'
 
@@ -25,7 +25,7 @@ const AppInit = () => {
             <Layout>
                 <div className="flex justify-end items-center gap-2">
                     Sing in as
-                    <SelectUsers
+                    <SelectUsersByRoles
                         className="w-[15rem] bg-background"
                         value={query.data}
                         onChange={singInAs}
@@ -35,6 +35,7 @@ const AppInit = () => {
                 <RoleRedirect
                     role={role}
                     navigationItems={navigationItems}
+                    actionItems={actionItems}
                 />
 
                 <Header
