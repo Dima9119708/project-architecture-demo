@@ -12,7 +12,7 @@ export const Header: FC<{ config: NavigationAndActionItems; currentPath: string 
                 <h1 className="text-2xl mr-5 font-bold">Logo</h1>
 
                 <RenderNavigationItems
-                    className="flex items-center gap-3 overflow-hidden"
+                    className="flex items-center gap-3 flex-1 overflow-hidden"
                     config={config[0]}
                     currentPath={currentPath}
                 />
