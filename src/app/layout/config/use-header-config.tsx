@@ -5,7 +5,7 @@ import { NavigationAndActionItems, mergeNavigationAndActionItems } from '@/share
 
 export const useHeaderConfig = (props: { navigationAndActionItems: NavigationAndActionItems }) => {
     const { navigationAndActionItems } = props
-
+    console.log('navigationAndActionItems =>', window.location)
     return useMemo(
         () =>
             mergeNavigationAndActionItems(navigationAndActionItems, {
