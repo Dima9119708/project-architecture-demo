@@ -1,0 +1,1 @@
+import{r as e,o,j as n}from"./index-BUY0Tv6C.js";import{B as a}from"./badge-C-K_rw_w.js";const c=()=>{const t=e.useRef(0),{data:r}=o({queryKey:["report-count"],queryFn:()=>++t.current,refetchInterval:2e3});return n.jsx(a,{variant:"default",children:r})};export{c as ReportCountNotification};
