@@ -1,7 +1,6 @@
-import { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
 
-import { HeaderLazy, Layout } from '@/app/layout'
+import { Header, Layout } from '@/app/layout'
 import RoleRedirect from '@/app/role-redirect/role-redirect'
 
 import { useSingInAs } from '@/features/auth/sing-in/ui/sing-in.tsx'
@@ -10,7 +9,6 @@ import { Role } from '@/entities/manage-roles'
 import { SessionProvider } from '@/entities/session'
 import { SelectUsersByRoles } from '@/entities/users'
 
-import { Skeleton } from '@/shared/ui/skeleton.tsx'
 import { Spinner } from '@/shared/ui/spinner'
 
 const AppInit = () => {
@@ -40,12 +38,10 @@ const AppInit = () => {
                     actionItems={actionItems}
                 />
 
-                <Suspense fallback={<Skeleton className="h-[3.2rem] w-full" />}>
-                    <HeaderLazy
-                        navigationItems={navigationItems[role] ?? []}
-                        actionItems={actionItems[role] ?? []}
-                    />
-                </Suspense>
+                <Header
+                    navigationItems={navigationItems[role] ?? []}
+                    actionItems={actionItems[role] ?? []}
+                />
 
                 {!query.isLoading && <Outlet />}
 

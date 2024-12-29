@@ -1,14 +1,14 @@
 import { useMemo } from 'react'
 
 import { EnumRoutes } from '@/shared/config/routes/routes'
-import { NavigationAndActionItems, mergeNavigationAndReturnActionItems } from '@/shared/ui/app-shell/header'
+import { NavigationAndActionItems, mergeNavigationAndActionItems } from '@/shared/ui/app-shell/header'
 
 export const useHeaderConfig = (props: { navigationAndActionItems: NavigationAndActionItems }) => {
     const { navigationAndActionItems } = props
 
     return useMemo(
         () =>
-            mergeNavigationAndReturnActionItems(navigationAndActionItems, {
+            mergeNavigationAndActionItems(navigationAndActionItems, {
                 [EnumRoutes.MANAGE_BOARDS]: {
                     lazy: async () => {
                         const { Airplay } = await import('lucide-react')
@@ -237,6 +237,16 @@ export const useHeaderConfig = (props: { navigationAndActionItems: NavigationAnd
                         return {
                             icon: <Settings />,
                             name: 'Admin settings',
+                        }
+                    },
+                },
+                [EnumRoutes.ANALYTICS]: {
+                    lazy: async () => {
+                        const { ChartBarIncreasing } = await import('lucide-react')
+
+                        return {
+                            icon: <ChartBarIncreasing />,
+                            name: 'Analytics',
                         }
                     },
                 },

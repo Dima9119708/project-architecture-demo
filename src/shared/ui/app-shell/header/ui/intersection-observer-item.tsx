@@ -37,7 +37,7 @@ export const IntersectionObserverItem = memo(
         return (
             <div
                 ref={onIntersectionObserver}
-                className={cn(props.className, { invisible: !isVisible })}
+                className={cn('transition-opacity', props.className, { 'opacity-0': !isVisible })}
             >
                 {props.children}
             </div>

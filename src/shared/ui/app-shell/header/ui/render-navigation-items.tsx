@@ -1,5 +1,5 @@
 import { Ellipsis } from 'lucide-react'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 
 import { isMatchPath } from '@/shared/lib/is-match-path.ts'
@@ -24,6 +24,10 @@ export const RenderNavigationItems = (props: { config: ItemConfig[]; className?:
         return isPathInTreeWithMatch(hiddenItems, currentPath)
     }, [currentPath, hiddenItems])
 
+    useEffect(() => {
+        return () => setHiddenItems([])
+    }, [props.config])
+
     const onView = useCallback(
         (path: string, isVisible: boolean) => {
             setHiddenItems((prevHiddenItems) => {
@@ -32,7 +36,7 @@ export const RenderNavigationItems = (props: { config: ItemConfig[]; className?:
                 if (!item) return prevHiddenItems
 
                 if (!isVisible && !prevHiddenItems.some((hiddenItem) => hiddenItem.path === path)) {
-                    return [...prevHiddenItems, item]
+                    return [item, ...prevHiddenItems]
                 }
 
                 if (isVisible) {
@@ -89,7 +93,7 @@ export const RenderNavigationItems = (props: { config: ItemConfig[]; className?:
         <>
             <div className={props.className}>{props.config.map(renderConfigItem)}</div>
             {!!hiddenItems.length && (
-                <div className="sticky top-0 right-0">
+                <div>
                     <Popover>
                         <PopoverTrigger asChild>
                             <Button

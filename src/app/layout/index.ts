@@ -1,4 +1,4 @@
-import { HeaderLazy } from './ui/header/header-lazy'
+import Header from './ui/header/header'
 import { Layout } from './ui/layout/layout.tsx'
 
-export { HeaderLazy, Layout }
+export { Header, Layout }

@@ -31,7 +31,7 @@ export type ActionItems = ItemConfig[]
 
 export type NavigationAndActionItems = [NavigationItems, ActionItems]
 
-export const mergeNavigationAndReturnActionItems = (
+export const mergeNavigationAndActionItems = (
     basicConfig: [NavigationItems, ActionItems],
     mergeConfig: Record<string, Partial<Omit<ItemConfig, 'children'>>>
 ): NavigationAndActionItems => {
