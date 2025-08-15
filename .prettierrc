@@ -9,12 +9,15 @@
 
     "importOrder": [
         "<THIRD_PARTY_MODULES>",
-        "^@tanstack/(.*)$",
-        "^@/app/(.*)$",
-        "^@/widgets/(.*)$",
-        "^@/features/(.*)$",
+        "^@/config/(.*)$",
+        "^@/utils/(.*)$",
+        "^@/stores/(.*)$",
         "^@/entities/(.*)$",
-        "^@/shared/(.*)$",
+
+        "^@/pages/(.*)$",
+        "^@/components/(.*)$",
+
+        "^[./](.*)$",
         "./(.*)$"
     ],
     "importOrderSeparation": true,

@@ -2,14 +2,18 @@ import { Eye } from 'lucide-react'
 import { Fragment } from 'react'
 import { Link, generatePath } from 'react-router-dom'
 
-import { useQuery } from '@tanstack/react-query'
+import { EnumRoutes } from '@/config/routes/routes'
 
-import SearchInput from '@/features/boards/search-input'
-import Pagination from '@/features/boards/update-table-pagination'
+import { useLimitState, useOffsetState, useSearchState } from '@/utils/helpers/states-hooks'
+import { boardsQuery } from '@/utils/queries/boards'
 
-import { boardsQuery, useLimitState, useOffsetState, useSearchState } from '@/entities/boards'
+import SearchInput from '@/pages/boards/ui/search-input'
+import Pagination from '@/pages/boards/ui/update-table-pagination'
 
-import { EnumRoutes } from '@/shared/config/routes/routes'
+import { MainPage } from '@/components/containers/main-page/main-page'
+import TitlePage from '@/components/containers/title-page/title-page'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import {
     Table,
     TableBody,
@@ -22,11 +26,9 @@ import {
     TableRoot,
     TableRow,
     TableRowDetail,
-} from '@/shared/ui/Table'
-import HeaderPage from '@/shared/ui/app-shell/header-page'
-import { MainPage } from '@/shared/ui/app-shell/main-page'
-import { Badge } from '@/shared/ui/badge'
-import { Button } from '@/shared/ui/button'
+} from '@/components/ui/ui-table'
+
+import { useQuery } from '@tanstack/react-query'
 
 const BoardsPage = () => {
     const [search] = useSearchState()
@@ -43,7 +45,7 @@ const BoardsPage = () => {
 
     return (
         <MainPage>
-            <HeaderPage
+            <TitlePage
                 title="Boards"
                 rightComponents={[<SearchInput />]}
             />

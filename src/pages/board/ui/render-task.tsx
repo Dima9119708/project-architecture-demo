@@ -1,8 +1,8 @@
 import { memo } from 'react'
 
-import { RemoveTaskByBoardById } from '@/features/task/remove-task-by-board-by-id'
-
-import { Task, TaskTitle } from '@/entities/task'
+import { RemoveTaskByBoardById } from './remove-task-by-board-by-id'
+import Task from './task'
+import TaskTitle from './task-title'
 
 export const RenderTask = memo((props: { title: string; columnId: string; itemId: string; boardId: string }) => {
     const { title, columnId, itemId, boardId } = props

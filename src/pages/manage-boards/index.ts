@@ -1,3 +1,3 @@
-import ManageBoardsPage from './ui/manage-boards-page.tsx'
+import ManageBoardsPage from './ui/manage-boards-page'
 
 export { ManageBoardsPage }

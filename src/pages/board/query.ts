@@ -2,8 +2,11 @@ import { produce } from 'immer'
 
 import { useQueries } from '@tanstack/react-query'
 
-import { TBoard, boardByIdQuery } from '@/entities/board'
-import { TTask, taskByBoardIdQuery } from '@/entities/task'
+import { boardByIdQuery } from '@/utils/queries/board'
+import { taskByBoardIdQuery } from '@/utils/queries/task'
+
+import { TBoard } from '@/entities/board'
+import { TTask } from '@/entities/task'
 
 export const useBoardQuery = (boardId: string) => {
     return useQueries({

@@ -1,20 +1,27 @@
+import { useMemo } from 'react'
 import { Outlet } from 'react-router-dom'
 
-import { Header, Layout } from '@/app/layout'
-import RoleRedirect from '@/app/role-redirect/role-redirect'
+import { HEADER_CONFIG } from '@/config/header/header'
+import { Role } from '@/config/roles/roles'
 
-import { useSingInAs } from '@/features/auth/sing-in/ui/sing-in.tsx'
-
-import { Role } from '@/entities/manage-roles'
-import { SessionProvider } from '@/entities/session'
-import { SelectUsersByRoles } from '@/entities/users'
-
-import { Spinner } from '@/shared/ui/spinner'
+import Header from '@/components/containers/header/header'
+import { mergeNavigationAndActionItems } from '@/components/containers/header/lib/configure'
+import RoleRedirect from '@/components/containers/role-redirect/role-redirect'
+import SelectUsersByRoles from '@/components/containers/select-users/select-users-by-roles'
+import { useSingInAs } from '@/components/containers/sing-in/ui/sing-in'
+import { SessionProvider } from '@/components/providers/session-provider'
+import { Layout } from '@/components/ui/layout/layout'
+import { Spinner } from '@/components/ui/spinner'
 
 const AppInit = () => {
     const { query, singInAs, navigationItems, actionItems } = useSingInAs()
 
     const role = (query.data?.role ?? '') as Role
+
+    const configureHeaderConfig = useMemo(
+        () => mergeNavigationAndActionItems([navigationItems[role] ?? [], actionItems[role] ?? []], HEADER_CONFIG),
+        [navigationItems[role], actionItems[role]]
+    )
 
     if (query.isLoading) {
         return <Spinner overlay />
@@ -38,10 +45,7 @@ const AppInit = () => {
                     actionItems={actionItems}
                 />
 
-                <Header
-                    navigationItems={navigationItems[role] ?? []}
-                    actionItems={actionItems[role] ?? []}
-                />
+                <Header configureHeaderConfig={configureHeaderConfig} />
 
                 {!query.isLoading && <Outlet />}
 
