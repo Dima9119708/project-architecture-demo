@@ -1,7 +1,7 @@
-import { FC } from 'react'
+import { type FC } from 'react'
 import { useLocation } from 'react-router-dom'
 
-import { NavigationAndActionItems } from './lib/configure'
+import { type NavigationAndActionItems } from './lib/configure'
 import { RenderActionItems } from './ui/render-action-items'
 import { RenderNavigationItems } from './ui/render-navigation-items'
 

@@ -1,7 +1,5 @@
 import { useMemo, useState } from 'react'
 
-import { useQuery } from '@tanstack/react-query'
-
 import { usersQuery } from '@/utils/queries/users'
 
 import { TUser } from '@/entities/users'
@@ -17,6 +15,8 @@ import {
     SelectValue,
 } from '@/components/ui/select'
 import { Skeleton } from '@/components/ui/skeleton'
+
+import { useQuery } from '@tanstack/react-query'
 
 interface SelectUsersProps extends SelectBaseProps<TUser> {
     className?: string

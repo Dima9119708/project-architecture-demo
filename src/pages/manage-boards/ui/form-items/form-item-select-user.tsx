@@ -1,6 +1,6 @@
 import { Controller } from 'react-hook-form'
 
-import SelectUsersByRoles from '@/components/containers/select-users/select-users-by-roles'
+import SelectUsersByRoles from '@/components/containers/select-users-by-roles/select-users-by-roles'
 
 interface FormSelectUserProps {
     name: string

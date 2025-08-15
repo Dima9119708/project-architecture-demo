@@ -1,6 +1,6 @@
 import { matchPath } from 'react-router-dom'
 
-import { ItemConfig } from './configure.ts'
+import { ItemConfig } from './configure'
 
 export function isPathInTreeWithMatch(tree: ItemConfig[], currentPath: string): boolean {
     for (const node of tree) {
