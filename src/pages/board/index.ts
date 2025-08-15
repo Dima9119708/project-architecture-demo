@@ -1,3 +1,3 @@
-import Board from './ui/Board.tsx'
+import Board from './ui/board.tsx'
 
 export { Board }

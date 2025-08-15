@@ -1,0 +1,33 @@
+import { Plus } from 'lucide-react'
+import { useFormContext } from 'react-hook-form'
+
+import { useFieldArrayMethodsContext } from '@/components/providers/form-field-array-provider'
+import { Button } from '@/components/ui/button'
+
+import { TFormManageBoardCreate, TFormManageBoardUpdate } from '../../model/form-manage-board-types'
+
+const FormItemAddRole = (props: { lastIndex: number }) => {
+    const { append } = useFieldArrayMethodsContext()
+    const { trigger } = useFormContext<TFormManageBoardUpdate | TFormManageBoardCreate>()
+
+    return (
+        <Button
+            variant="outline"
+            onClick={async () => {
+                const pathUserName: `project_access.${number}.user` = `project_access.${props.lastIndex}.user`
+                const pathRoleName: `project_access.${number}.role` = `project_access.${props.lastIndex}.role`
+
+                const valid = await trigger([pathUserName, pathRoleName])
+
+                if (!valid) return
+
+                append({})
+            }}
+        >
+            <Plus />
+            Add
+        </Button>
+    )
+}
+
+export default FormItemAddRole

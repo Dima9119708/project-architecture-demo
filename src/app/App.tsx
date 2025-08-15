@@ -1,24 +1,69 @@
 import { RouterProvider } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
 
-import { QueryClientProvider } from '@tanstack/react-query'
+import AppInit from '@/app/app-init/app-init'
 
-import { queryClient } from '@/shared/config/query-client/config'
-import { Spinner } from '@/shared/ui/spinner'
+import { EnumRoutes } from '@/config/routes/routes'
 
-import { router } from './router/router'
-import './styles/index.css'
-import { NuqsAdapter } from 'nuqs/adapters/react-router'
+import NotFoundPage from '@/components/containers/not-found-page/not-found-page'
+import { Spinner } from '@/components/ui/spinner'
+
+import './index.css'
+
+const basename = import.meta.env.VITE_APP_BASENAME
+
+const router = createBrowserRouter(
+    [
+        {
+            path: '/',
+            element: <AppInit />,
+            children: [
+                {
+                    path: EnumRoutes.MANAGE_BOARDS,
+                    lazy: async () => {
+                        const { ManageBoardsPage } = await import('@/pages/manage-boards')
+
+                        return {
+                            element: <ManageBoardsPage />,
+                        }
+                    },
+                },
+                {
+                    path: EnumRoutes.BOARD,
+                    lazy: async () => {
+                        const { Board } = await import('@/pages/board')
+
+                        return {
+                            element: <Board />,
+                        }
+                    },
+                },
+                {
+                    path: EnumRoutes.BOARDS,
+                    lazy: async () => {
+                        const { BoardsPage } = await import('@/pages/boards')
+
+                        return {
+                            element: <BoardsPage />,
+                        }
+                    },
+                },
+                {
+                    path: '*',
+                    element: <NotFoundPage />,
+                },
+            ],
+        },
+    ],
+    { basename: basename }
+)
 
 export default function App() {
     return (
-        <QueryClientProvider client={queryClient}>
-            <NuqsAdapter>
-                <RouterProvider
-                    router={router}
-                    fallbackElement={<Spinner overlay />}
-                    future={{ v7_startTransition: false }}
-                />
-            </NuqsAdapter>
-        </QueryClientProvider>
+        <RouterProvider
+            router={router}
+            fallbackElement={<Spinner overlay />}
+            future={{ v7_startTransition: false }}
+        />
     )
 }

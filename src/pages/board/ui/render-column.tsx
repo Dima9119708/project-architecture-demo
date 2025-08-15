@@ -1,11 +1,11 @@
 import { ReactNode, memo } from 'react'
 
-import { RemoveColumn } from '@/features/board/remove-column.tsx'
-import { CreateTaskByBoardById } from '@/features/task/create-task-by-board-by-id.tsx'
-
-import { Column, ColumnTitle } from '@/entities/board'
 import { TTask } from '@/entities/task'
 
+import Column from './column'
+import ColumnTitle from './column-title'
+import { CreateTaskByBoardById } from './create-task-by-board-by-id'
+import { RemoveColumn } from './remove-column'
 import { RenderTask } from './render-task'
 
 export const RenderColumn = memo((props: { title: string; columnId: string; items: TTask[]; boardId: string; children?: ReactNode }) => {

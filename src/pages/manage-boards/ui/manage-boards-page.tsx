@@ -2,15 +2,16 @@ import { Eye, Pencil, Trash2 } from 'lucide-react'
 import { FC, Fragment, Suspense } from 'react'
 import { Link, generatePath } from 'react-router-dom'
 
-import { useQuery } from '@tanstack/react-query'
+import { EnumRoutes } from '@/config/routes/routes'
 
-import { FormManageBoardLazy, WrapperFormManageBoard } from '@/features/manage-boards/create-and-update'
-import SearchInput from '@/features/manage-boards/search-input'
-import Pagination from '@/features/manage-boards/update-table-pagination.tsx'
+import { useLimitState, useOffsetState, useSearchState } from '@/utils/helpers/states-hooks'
+import { manageBoardsQuery } from '@/utils/queries/manage-boards'
 
-import { manageBoardsQuery, useLimitState, useOffsetState, useSearchState } from '@/entities/manage-boards'
-
-import { EnumRoutes } from '@/shared/config/routes/routes.ts'
+import { MainPage } from '@/components/containers/main-page/main-page'
+import TitlePage from '@/components/containers/title-page/title-page.tsx'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Spinner } from '@/components/ui/spinner'
 import {
     Table,
     TableBody,
@@ -24,12 +25,14 @@ import {
     TableRow,
     TableRowDetail,
     TableRowHighlightController,
-} from '@/shared/ui/Table'
-import HeaderPage from '@/shared/ui/app-shell/header-page'
-import { MainPage } from '@/shared/ui/app-shell/main-page'
-import { Badge } from '@/shared/ui/badge'
-import { Button } from '@/shared/ui/button'
-import { Spinner } from '@/shared/ui/spinner'
+} from '@/components/ui/ui-table'
+
+import { FormManageBoardLazy } from './form-manage-board-lazy'
+import SearchInput from './search-input'
+import Pagination from './update-table-pagination'
+import WrapperFormManageBoard from './wrapper-form-manage-board'
+
+import { useQuery } from '@tanstack/react-query'
 
 const ContainerFormManageBoard: FC<{ isOpen: boolean }> = (props) => {
     return <Suspense fallback={<Spinner />}>{props.isOpen && <FormManageBoardLazy />}</Suspense>
@@ -50,7 +53,7 @@ const ManageBoardsPage = () => {
 
     return (
         <MainPage>
-            <HeaderPage
+            <TitlePage
                 title="Manage boards"
                 leftComponents={[
                     <WrapperFormManageBoard triggerElement={<Button variant="default">Create board</Button>}>
