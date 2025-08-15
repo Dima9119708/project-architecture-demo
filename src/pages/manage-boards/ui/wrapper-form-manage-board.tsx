@@ -2,9 +2,9 @@ import { FC, FunctionComponent, useState } from 'react'
 import * as React from 'react'
 import { Drawer as DrawerPrimitive } from 'vaul'
 
-import { FormManageBoardContext } from '@/pages/manage-boards/model/form-manage-board-context.ts'
+import { FormManageBoardContext } from '@/pages/manage-boards/model/form-manage-board-context'
 
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer.tsx'
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer'
 
 const WrapperFormManageBoard: FC<{
     triggerElement: React.ReactNode

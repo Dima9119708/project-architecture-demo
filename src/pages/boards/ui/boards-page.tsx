@@ -11,7 +11,7 @@ import SearchInput from '@/pages/boards/ui/search-input'
 import Pagination from '@/pages/boards/ui/update-table-pagination'
 
 import { MainPage } from '@/components/containers/main-page/main-page'
-import TitlePage from '@/components/containers/title-page/title-page.tsx'
+import TitlePage from '@/components/containers/title-page/title-page'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {

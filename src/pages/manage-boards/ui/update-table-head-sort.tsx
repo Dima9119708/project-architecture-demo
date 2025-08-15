@@ -1,6 +1,6 @@
 import { ComponentProps, FC } from 'react'
 
-import { useSortState } from '@/entities/manage-boards'
+import { useSortState } from '@/utils/helpers/states-hooks'
 
 import { SortDirection, TableHeadSortController } from '@/components/ui/ui-table'
 
